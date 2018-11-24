@@ -14,32 +14,32 @@ export default function Menu({ onItemSelected, userInfo, logOut }) {
       </View>
 
       <View style={styles.menuContainer}>
-        <TouchableOpacity onPress={() => onItemSelected('Home')} style={[styles.itemButton, styles.itemButtonFirst]}>
+        <TouchableOpacity onPress={() => onItemSelected('Главная')} style={styles.itemButton}>
           <Image source={require('../images/home.png')} style={styles.icon} />
           <Text style={styles.item}>Домой</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onItemSelected('Stats')} style={styles.itemButton}>
+        <TouchableOpacity onPress={() => onItemSelected('Основные показатели')} style={styles.itemButton}>
           <Image source={require('../images/performance.png')} style={styles.icon} />
           <Text style={styles.item}>Основные показатели</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onItemSelected('Recommendations')} style={styles.itemButton}>
+        <TouchableOpacity onPress={() => onItemSelected('Система рекомендаций')} style={styles.itemButton}>
           <Image source={require('../images/quality.png')} style={styles.icon} /> 
           <Text style={styles.item}>Система рекомендаций</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onItemSelected('Mail')} style={styles.itemButton}>
+        <TouchableOpacity onPress={() => onItemSelected('Почтовая рассылка')} style={styles.itemButton}>
           <Image source={require('../images/envelope.png')} style={styles.icon} /> 
           <Text style={styles.item}>Почтовая рассылка</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onItemSelected('Interests')} style={styles.itemButton}>
+        <TouchableOpacity onPress={() => onItemSelected('Интересы')} style={styles.itemButton}>
           <Image source={require('../images/interest.png')} style={styles.icon} /> 
           <Text style={styles.item}>Интересы</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={logOut} style={[styles.itemButton, styles.itemButtonLast]}>
+        <TouchableOpacity onPress={logOut} style={styles.itemButton}>
           <Image source={require('../images/logout.png')} style={styles.icon} /> 
           <Text style={styles.item}>Выход</Text>
         </TouchableOpacity>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
       paddingVertical: 20,
       borderBottomColor: 'rgb(259,54,36)',
       borderBottomWidth: 2,
-      marginBottom: 20
+      marginBottom: 10
     },
     info: {
       color: 'white',
@@ -73,19 +73,7 @@ const styles = StyleSheet.create({
     itemButton: {
       flexDirection: 'row',
       height: 40,
-      paddingHorizontal: 15,
-      borderTopColor: '#666',
-      borderTopWidth: 1,
-      borderBottomColor: '#666',
-      borderBottomWidth: 1,
-    },
-    itemButtonFirst: {
-      borderTopColor: '#666',
-      borderTopWidth: 2
-    },
-    itemButtonLast: {
-      borderBottomColor: '#666',
-      borderBottomWidth: 2
+      paddingHorizontal: 15
     },
     item: {
       color: 'white',

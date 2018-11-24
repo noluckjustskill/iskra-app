@@ -13,6 +13,7 @@ export default class App extends Component {
       currView: 0,
       login: null,
       pass: null,
+      inAuth: false,
       badAuth: false,
       authData: {
         key: null,
@@ -31,6 +32,8 @@ export default class App extends Component {
         this.getKeyAuth(login, pass).then(res => {
           resolve(res);
         });
+      }else{
+        resolve(false);
       }
     });
   }
@@ -51,6 +54,8 @@ export default class App extends Component {
 
     if(login && pass){
       Keyboard.dismiss();
+
+      this.setState(Object.assign(this.state, {inAuth: true}));
 
       this.getKeyAuth(login, pass).then(data => {
         let nextState;
@@ -123,17 +128,12 @@ export default class App extends Component {
                 const stop = html.search("window.iskraRole");
 
                 const json = html.slice(start + 22, stop);
-                const info = JSON.parse(json.trim());
 
                 resolve({
                   authData: {
                     key: authData.key,
                     auth: data.auth,
-                    keyInfo: {
-                      name: info.name,
-                      title: info.title,
-                      url: info.url
-                    }
+                    keyInfo: JSON.parse(json.trim().slice(0, -1))
                   }
                 });
               });
@@ -165,7 +165,10 @@ export default class App extends Component {
   render() {
 
     if(this.state.authData.key === null && !this.state.badAuth){
+
       this.getAuth().then(info => {
+        if(this.state.inAuth) return;
+
         let nextState;
 
         if(info){
@@ -188,7 +191,7 @@ export default class App extends Component {
 
     }else if(this.state.currView === 2){
 
-      return (<MainScreen userInfo={this.state.authData.keyInfo} logOut={this.logOut.bind(this)} />);
+      return (<MainScreen keyVal={this.state.authData.key} authVal={this.state.authData.auth} userInfo={this.state.authData.keyInfo} logOut={this.logOut.bind(this)} />);
 
     }else if(this.state.currView === 3){
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, KeyboardAvoidingView, Image} from 'react-native';
+import {StyleSheet, Text, View, KeyboardAvoidingView, Image, ActivityIndicator} from 'react-native';
 
 import LoginForm from './loginForm';
 
@@ -20,12 +20,14 @@ export default class Login extends Component {
   render() {
     let text = <Text style={styles.text}>Пожалуйста, авторизуйтесь</Text>;
     let form = <LoginForm style={styles.form} doField={this.props.doField} doAuth={this.proccess.bind(this)} />;
+    let indicator = <View />;
 
     if(this.props.isBad){
       text = <Text style={styles.red}>Неверный логин или пароль</Text>
-    }else if(this.props.during && !this.props.isBad){
+    }else if(this.state.during){
       text = <Text style={styles.text}>Подождите несколько секунд...</Text>;
-      //form = ... TODO анимация
+      form = <View />;
+      indicator = <ActivityIndicator style={styles.indicator} size="large" color="white" />
     }
 
     return (
@@ -33,6 +35,7 @@ export default class Login extends Component {
         <View style={styles.logoContainer}>
           <Image source={require('../images/logo-banner.png')} style={styles.logo} resizeMode="contain" />
           {text}
+          {indicator}
         </View>
         
         <View>
@@ -69,5 +72,8 @@ const styles = StyleSheet.create({
   red: {
     textAlign: 'center',
     color: 'red'
+  },
+  indicator: {
+    marginTop: 40
   }
 });
