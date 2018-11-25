@@ -19,7 +19,8 @@ export default class MainScreen extends Component {
 
         this.state = {
             isOpen: false,
-            selectedItem: 'Главная'
+            selectedItem: 'Главная',
+            itemNum: 1
         };
     }
 
@@ -36,10 +37,11 @@ export default class MainScreen extends Component {
     }
 
     onMenuItemSelected(item) {
-        this.setState({
+        this.setState(prev => ({
             isOpen: false,
             selectedItem: item,
-        });
+            itemNum: prev.itemNum + 1
+        }));
     }
 
     render() {
@@ -56,7 +58,7 @@ export default class MainScreen extends Component {
                         <Text style={styles.page}>{this.state.selectedItem}</Text>
                     </View>
 
-                    <CurrView page={this.state.selectedItem} keyVal={this.props.keyVal} authVal={this.props.authVal} data={this.props.userInfo} />
+                    <CurrView page={this.state.selectedItem} keyVal={this.props.keyVal} authVal={this.props.authVal} data={this.props.userInfo} newPage={this.state.itemNum} />
                 </View>
             </SideMenu>
         );
@@ -80,11 +82,11 @@ class CurrView extends Component {
         const s = obj.startDate;
         const e = obj.endDate;
 
-        this.setState(perv => (
+        this.setState(prev => (
             {
                 start: s,
                 end: e,
-                renew: perv.renew + 1
+                renew: prev.renew + 1
             }
         ));
     }
@@ -147,7 +149,7 @@ class CurrView extends Component {
                         onConfirm = {this.setDate.bind(this)}
                     />
 
-                    <Charts from={this.state.start} to={this.state.end} keyVal={this.props.keyVal} authVal={this.props.authVal} type={this.props.page} renew={this.state.renew} />
+                    <Charts from={this.state.start} to={this.state.end} keyVal={this.props.keyVal} authVal={this.props.authVal} type={this.props.page} renew={this.state.renew + this.props.newPage} />
                 </ScrollView>
             );
         }

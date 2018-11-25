@@ -5,6 +5,8 @@ import BarChartView from './chart-types/bar';
 import LineChartView from './chart-types/line';
 import PieChartView from './chart-types/pie';
 
+const chartTypes = require('../../config/chart-types');
+
 export default class Charts extends Component {
     constructor(props) {
         super(props);
@@ -68,7 +70,7 @@ export default class Charts extends Component {
                     <ActivityIndicator styles={styles.loader} size="large" color="#2f3f4e" />
                 </View>
             );
-        }else{
+        } else {
             return (
                 <View style={styles.chartsContainer}>
                     {this.state.blocks}
@@ -77,46 +79,6 @@ export default class Charts extends Component {
         }
     }
 }
-
-const chartTypes = {
-    'Основные показатели': [{
-        item: 'sessions',
-        type: 'line',
-        info: {
-            name: 'Посещаемость сайта'
-        }
-    },{
-        item: 'conv',
-        type: 'pie',
-        info: {
-            name: "Конверсия"
-        }
-    },{
-        item: 'revenue',
-        type: 'line',
-        info: {
-            name: "Выручка с сайта"
-        }
-    },{
-        item: 'avgprice',
-        type: 'line',
-        info: {
-            name: "Средняя стоимость товара"
-        }
-    },{
-        item: 'arpu',
-        type: 'line',
-        info: {
-            name: "ARPU"
-        }
-    },{
-        item: 'arppu',
-        type: 'line',
-        info: {
-            name: "ARPPU"
-        }
-    }]
-};
 
 const styles = StyleSheet.create({
     container: {

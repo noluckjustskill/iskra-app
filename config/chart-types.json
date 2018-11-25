@@ -1,0 +1,78 @@
+{
+    "Основные показатели":[
+       {
+          "item":"sessions",
+          "type":"line",
+          "info":{
+             "name":"Посещаемость сайта"
+          }
+       },
+       {
+          "item":"conv",
+          "type":"pie",
+          "info":{
+             "name":"Конверсия",
+             "layers":[
+                "Ушли",
+                "До цели",
+                "Купили"
+             ]
+          }
+       },
+       {
+          "item":"revenue",
+          "type":"line",
+          "info":{
+             "name":"Выручка с сайта"
+          }
+       },
+       {
+          "item":"avgprice",
+          "type":"line",
+          "info":{
+             "name":"Средняя стоимость товара"
+          }
+       },
+       {
+          "item":"arpu",
+          "type":"line",
+          "info":{
+             "name":"ARPU"
+          }
+       },
+       {
+          "item":"arppu",
+          "type":"line",
+          "info":{
+             "name":"ARPPU"
+          }
+       }
+    ],
+    "Система рекомендаций":[
+       {
+          "item":"goals_rcmd",
+          "type":"columns",
+          "info":{
+             "name":"Заказы с рекомендаций"
+          }
+       },
+       {
+          "item":"revenue_rcmd",
+          "type":"columns",
+          "info":{
+             "name":"Выручка с рекомендаций"
+          }
+       },
+       {
+          "item":"goals_rcmd_percent",
+          "type":"pie",
+          "info":{
+             "name":"Процент заказов через рекомендации",
+             "layers":[
+                "Обычные",
+                "Рекомендации"
+             ]
+          }
+       }
+    ]
+ }
