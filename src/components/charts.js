@@ -4,6 +4,7 @@ import {StyleSheet, View, ScrollView, ActivityIndicator} from 'react-native';
 import BarChartView from './chart-types/bar';
 import LineChartView from './chart-types/line';
 import PieChartView from './chart-types/pie';
+import InterestsChartView from './chart-types/interests';
 
 const chartTypes = require('../../config/chart-types');
 
@@ -16,8 +17,8 @@ export default class Charts extends Component {
         }
     }
 
-    fetchData = async (item, from, to) => { 
-        const url = "https://lk.iskra-lab.com/statistics/general/cgi/timechart.php?from=" + from +"&to=" + to + "&group=day&item=" + item;
+    fetchData = async (item, from, to, mode) => { 
+        const url = "https://lk.iskra-lab.com/statistics/general/cgi/" + (mode || "timechart") + ".php?from=" + from +"&to=" + to + (!mode ? "&group=day" : "") + (item ? ("&item=" + item) : "");
 
         const params = {
             method: "GET",
@@ -44,13 +45,18 @@ export default class Charts extends Component {
     genCharts = async (page) => {
         const all = (chartTypes[this.props.type] || []).map((chart, i) => {
             return new Promise(resolve => {
-                this.fetchData(chart.item, this.props.from, this.props.to).then(data => {
+                this.fetchData(chart.item, this.props.from, this.props.to, chart.mode).then(data => {
                     if(chart.type === 'line'){
                         resolve(<LineChartView key={i} style={styles.chart} chartData={data} chartInfo={chart.info} />);
                     }else if(chart.type === 'pie'){
                         resolve(<PieChartView key={i} style={styles.chart} chartData={data} chartInfo={chart.info} />);
                     }else if(chart.type === 'columns'){
                         resolve(<BarChartView key={i} style={styles.chart} chartData={data} chartInfo={chart.info} />);
+                    }else if(chart.type === 'interests'){
+                        resolve([
+                            <InterestsChartView key={Math.random()} style={styles.chart} chartData={Object.values(data)[0]} chartInfo={chart.info.catalog} />,
+                            <InterestsChartView key={Math.random()} style={styles.chart} chartData={Object.values(data)[1]} chartInfo={chart.info.cost} />
+                        ]);
                     }
                 });
             });

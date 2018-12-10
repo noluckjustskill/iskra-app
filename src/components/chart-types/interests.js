@@ -4,7 +4,7 @@ import {BarChart} from 'react-native-chart-kit';
 
 const screenWidth = Dimensions.get('window').width;
 
-export default class BarChartView extends Component {
+export default class InterestsChartView extends Component {
     render() {
         const chartConfig = {
             backgroundColor: '#fff',
@@ -15,59 +15,30 @@ export default class BarChartView extends Component {
             horizontalLines: true
         }
 
-        let labels = Object.keys(this.props.chartData);
-        
-        if (this.props.chartInfo.slice) {
-            if(this.props.chartInfo.slice > 0)
-                labels = labels.map(d => { return d.slice(this.props.chartInfo.slice) });
-            else
-                labels = labels.map(d => { return d.slice(0, (-1) * this.props.chartInfo.slice) });
-        }
-        
-        const indexes = [];
-
-        const group = typeof this.props.chartInfo.group === "number" ? this.props.chartInfo.group : 0;
-        if (group > 0){
-            if(labels.length > group){
-                labels = labels.filter((l, i, self) => {
-                    if( (i + 1) % Math.ceil(self.length / group) == 0 || i == 0 || (i + 1) == labels.length ) {
-                        indexes.push(i);
-
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
-            }
-        } else if (group < 0) {
-            labels = labels.filter((l, i) => {
-                if(i < -group){
-                    indexes.push(i);
-
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        }
-
+        const group = this.props.chartInfo.group;
+        const labels = [], dataSet = [];
         let result = 0;
+        
+        this.props.chartData.slice(0, group).forEach(val => {
+            labels.push(val[0]);
+
+            const sense = Math.round(parseFloat(val[1]));
+            result += sense;
+            dataSet.push(sense);
+        });
+
+        let other = 0;
+        this.props.chartData.forEach((val, i) => {
+            if(i > group) other += parseFloat(val[1]);
+        });
+
+        labels.push("Другое");
+        dataSet.push(Math.round(other));
+
         const data = {
             labels: labels,
             datasets: [{
-                data: Object.values(this.props.chartData).map(v => { 
-                    const valRaw = typeof v === "string" ? parseFloat(v.length ? v.split(",")[0] : 0) : v;
-                    const val = Math.round(valRaw);
-
-                    result += val;
-                    return val;
-                }).filter((v, i) => {
-                    if(indexes.length){
-                        return indexes.indexOf(i) !== -1;
-                    } else {
-                        return true;
-                    }
-                })
+                data: dataSet
             }]
         }
 

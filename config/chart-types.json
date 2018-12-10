@@ -1,78 +1,177 @@
 {
-    "Основные показатели":[
-       {
-          "item":"sessions",
-          "type":"line",
-          "info":{
-             "name":"Посещаемость сайта"
-          }
-       },
-       {
-          "item":"conv",
-          "type":"pie",
-          "info":{
-             "name":"Конверсия",
-             "layers":[
-                "Ушли",
-                "До цели",
-                "Купили"
-             ]
-          }
-       },
-       {
-          "item":"revenue",
-          "type":"line",
-          "info":{
-             "name":"Выручка с сайта"
-          }
-       },
-       {
-          "item":"avgprice",
-          "type":"line",
-          "info":{
-             "name":"Средняя стоимость товара"
-          }
-       },
-       {
-          "item":"arpu",
-          "type":"line",
-          "info":{
-             "name":"ARPU"
-          }
-       },
-       {
-          "item":"arppu",
-          "type":"line",
-          "info":{
-             "name":"ARPPU"
-          }
-       }
-    ],
-    "Система рекомендаций":[
-       {
-          "item":"goals_rcmd",
-          "type":"columns",
-          "info":{
-             "name":"Заказы с рекомендаций"
-          }
-       },
-       {
-          "item":"revenue_rcmd",
-          "type":"columns",
-          "info":{
-             "name":"Выручка с рекомендаций"
-          }
-       },
-       {
-          "item":"goals_rcmd_percent",
-          "type":"pie",
-          "info":{
-             "name":"Процент заказов через рекомендации",
-             "layers":[
-                "Обычные",
-                "Рекомендации"
-             ]
-          }
-       }
-    ]
- }
+   "Основные показатели": [
+      {
+         "item": "sessions",
+         "type": "line",
+         "info": {
+            "name": "Посещаемость сайта",
+            "slice": 5,
+            "group": 7
+         }
+      },
+      {
+         "item": "conv",
+         "type": "pie",
+         "info": {
+            "name": "Конверсия",
+            "layers": [
+               "Ушли",
+               "До цели",
+               "Купили"
+            ]
+         }
+      },
+      {
+         "item": "revenue",
+         "type": "line",
+         "info": {
+            "name": "Выручка с сайта",
+            "slice": 5,
+            "group": 7
+         }
+      },
+      {
+         "item": "avgprice",
+         "type": "line",
+         "info": {
+            "name": "Средняя стоимость товара",
+            "slice": 5,
+            "group": 7,
+            "average": true
+         }
+      },
+      {
+         "item": "arpu",
+         "type": "line",
+         "info": {
+            "name": "ARPU",
+            "slice": 5,
+            "group": 7,
+            "average": true
+         }
+      },
+      {
+         "item": "arppu",
+         "type": "line",
+         "info": {
+            "name": "ARPPU",
+            "slice": 5,
+            "group": 7,
+            "average": true
+         }
+      }
+   ],
+   "Система рекомендаций": [
+      {
+         "item": "goals_rcmd",
+         "type": "columns",
+         "info": {
+            "name": "Заказы с рекомендаций",
+            "slice": 5,
+            "group": 5
+         }
+      },
+      {
+         "item": "revenue_rcmd",
+         "type": "columns",
+         "info": {
+            "name": "Выручка с рекомендаций",
+            "slice": 5,
+            "group": 5
+         }
+      },
+      {
+         "item": "goals_rcmd_percent",
+         "type": "pie",
+         "info": {
+            "name": "Процент заказов через рекомендации",
+            "layers": [
+               "Обычные",
+               "Рекомендации"
+            ]
+         }
+      }
+   ],
+   "Почтовая рассылка": [
+      {
+         "item": "messages",
+         "type": "line",
+         "info": {
+            "name": "Отправлено писем",
+            "slice": 5,
+            "group": 7
+         }
+      },
+      {
+         "item": "messages_conv",
+         "type": "pie",
+         "info": {
+            "name": "Поведение",
+            "layers": [
+               "Закрыли",
+               "Перешли",
+               "До цели",
+               "Купили"
+            ]
+         }
+      },
+      {
+         "item": "messages_revenue",
+         "type": "line",
+         "info": {
+            "name": "Выручка с рассылок",
+            "slice": 5,
+            "group": 7
+         }
+      },
+      {
+         "item": "messaging",
+         "mode": "distchart",
+         "type": "columns",
+         "info": {
+            "name": "Отправленные рассылки",
+            "group": -5,
+            "slice": -7
+         }
+      },
+      {
+         "item": "messaging_conv_1",
+         "mode": "distchart",
+         "type": "columns",
+         "info": {
+            "name": "Конверсия по рассылкам",
+            "slice": -7,
+            "group": 5,
+            "noCalc": true
+         }
+      },
+      {
+         "item": "mail_services",
+         "mode": "distchart",
+         "type": "columns",
+         "info": {
+            "name": "Сервисы",
+            "noCalc": true,
+            "group": 4
+         }
+      }
+   ],
+   "Интересы": [
+      {
+         "mode": "interests",
+         "type": "interests",
+         "info": {
+            "catalog": {
+               "name": "Каталог",
+               "group": 4,
+               "noCalc": true
+            },
+            "cost": {
+               "name": "Цена",
+               "group": 4,
+               "noCalc": true
+            }
+         }
+      }
+   ]
+}
