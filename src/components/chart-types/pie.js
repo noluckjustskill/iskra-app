@@ -40,9 +40,9 @@ export default class PieChartView extends Component {
 
 
         return (
-            <View style={styles.chartArea} elevation={5}>
+            <View style={styles.chartArea}>
                 {visible ?
-                    <PieChart style={styles.chart} data={data} width={screenWidth - 40} height={250} chartConfig={chartConfig} accessor={"population"} backgroundColor={"transparent"} paddingLeft={"30"} />
+                    <PieChart data={data} width={screenWidth - 25} height={250} chartConfig={chartConfig} accessor={"population"} backgroundColor={"transparent"} paddingLeft={"30"} />
                 : <Text style={styles.empty}>{"Нет данных"}</Text>}
 
                 <Text style={styles.title}>{this.props.chartInfo.name || ""}</Text>
@@ -53,25 +53,16 @@ export default class PieChartView extends Component {
 
 const styles = StyleSheet.create({
     chartArea: {
-        marginBottom: 20,
-        height: 290
-    },
-    chart: {
-        height: 240,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.7,
-        shadowRadius: 5
+        width: screenWidth - 60,
+        height: 290,
+        overflow: 'hidden'
     },
     title: {
-        paddingBottom: 10,
         textAlign: 'center',
         fontSize: 15,
         fontWeight: '800',
         color: '#2f3f4e',
-        borderBottomWidth: 1,
-        borderBottomColor: '#2f3f4e',
-        width: screenWidth - 40
+        width: screenWidth - 30
     },
     empty: {
         fontSize: 17,

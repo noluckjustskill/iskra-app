@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
       flex: 1,
       width: window.width,
       height: window.height,
-      backgroundColor: '#212121'
+      backgroundColor: '#33333d'
     },
     infoContainer: {
-      backgroundColor: 'black',
+      backgroundColor: '#03A9F4',
       paddingVertical: 20,
-      borderBottomColor: 'rgb(259,54,36)',
+      borderBottomColor: '#1E88E5',
       borderBottomWidth: 2,
       marginBottom: 10
     },

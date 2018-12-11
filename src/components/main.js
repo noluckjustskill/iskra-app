@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, View, ScrollView, TouchableOpacity, Image} from 'react-native';
 
 import SideMenu from 'react-native-side-menu';
+import CardView from 'react-native-cardview';
 import DatePicker from 'react-native-date-ranges';
 
 import Menu from './menu';
 import Charts from './charts';
 
 const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
 
 export default class MainScreen extends Component {
     constructor(props){
@@ -50,20 +52,22 @@ export default class MainScreen extends Component {
         return (
             <SideMenu menu={menu} style={styles.side} isOpen={this.state.isOpen} onChange={isOpen => this.updateMenuState(isOpen)} >
                 <View style={styles.container}>
-                    <View style={styles.header} elevation={5}>
-                        <TouchableOpacity onPress={this.toggle} style={styles.menuButton}>
-                            <Image source={require('../images/menu.png')} style={styles.menuButtonImage} /> 
-                        </TouchableOpacity> 
+                    <CardView cardElevation={7} cardMaxElevation={7} cornerRadius={0}>
+                        <View style={styles.header}>
+                            <TouchableOpacity onPress={this.toggle} style={styles.menuButton}>
+                                <Image source={require('../images/menu.png')} style={styles.menuButtonImage} /> 
+                            </TouchableOpacity> 
 
-                        <Text style={styles.page}>{this.state.selectedItem}</Text>
-                    </View>
+                            <Text style={styles.page}>{this.state.selectedItem}</Text>
+                        </View>
+                    </CardView>
 
                     <CurrView page={this.state.selectedItem} keyVal={this.props.keyVal} authVal={this.props.authVal} data={this.props.userInfo} newPage={this.state.itemNum} />
                 </View>
             </SideMenu>
         );
     }
-}
+};
 
 class CurrView extends Component {
     constructor(props){
@@ -96,30 +100,32 @@ class CurrView extends Component {
 
         if (this.props.page === 'Главная') {
             return (
-                <View style={styles.area} elevation={5}>
-                    <Text style={styles.title}>{"Добро пожаловать"}</Text>
+                <View style={styles.area}>
+                    <CardView cardElevation={3} cardMaxElevation={3} cornerRadius={3} style={styles.card}>
+                        <Text style={styles.title}>{"Основная информация"}</Text>
 
-                    <View style={styles.line}>
-                        <Text style={{ fontWeight: '600' }}>{"Клиент: "}</Text><Text>{data.title}</Text>
-                    </View>
-                    <View style={styles.line}>
-                        <Text style={{ fontWeight: '600' }}>{"Ключ: "}</Text><Text>{this.props.keyVal}</Text>
-                    </View>
-                    <View style={styles.line}>
-                        <Text style={{ fontWeight: '600' }}>{"Администратор: "}</Text><Text>{data.name}</Text>
-                    </View>
-                    <View style={styles.line}>
-                        <Text style={{ fontWeight: '600' }}>{"Активен: "}</Text><Text>{!data.disabled ? "Да" : "Нет"}</Text>
-                    </View>
-                    <View style={styles.line}>
-                        <Text style={{ fontWeight: '600' }}>{"Интеграция: "}</Text><Text>{data.integrated ? "Да" : "Нет"}</Text>
-                    </View>
-                    <View style={styles.line}>
-                        <Text style={{ fontWeight: '600' }}>{"Баланс: "}</Text><Text>{data.balance ? data.balance : "-"}</Text>
-                    </View>
-                    <View style={[styles.line, styles.lastLine]}>
-                        <Text style={{ fontWeight: '600' }}>{"URL сайта: "}</Text><Text>{data.url}</Text>
-                    </View>
+                        <View style={styles.line}>
+                            <Text style={{ fontWeight: '600' }}>{"Клиент: "}</Text><Text>{data.title}</Text>
+                        </View>
+                        <View style={styles.line}>
+                            <Text style={{ fontWeight: '600' }}>{"Ключ: "}</Text><Text>{this.props.keyVal}</Text>
+                        </View>
+                        <View style={styles.line}>
+                            <Text style={{ fontWeight: '600' }}>{"Администратор: "}</Text><Text>{data.name}</Text>
+                        </View>
+                        <View style={styles.line}>
+                            <Text style={{ fontWeight: '600' }}>{"Активен: "}</Text><Text>{!data.disabled ? "Да" : "Нет"}</Text>
+                        </View>
+                        <View style={styles.line}>
+                            <Text style={{ fontWeight: '600' }}>{"Интеграция: "}</Text><Text>{data.integrated ? "Да" : "Нет"}</Text>
+                        </View>
+                        <View style={styles.line}>
+                            <Text style={{ fontWeight: '600' }}>{"Баланс: "}</Text><Text>{data.balance ? data.balance : "-"}</Text>
+                        </View>
+                        <View style={styles.line}>
+                            <Text style={{ fontWeight: '600' }}>{"URL сайта: "}</Text><Text>{data.url}</Text>
+                        </View>
+                    </CardView>
                 </View>
             );
         } else {
@@ -129,6 +135,10 @@ class CurrView extends Component {
                         style = {styles.picker}
                         customStyles = {{
                             placeholderText: {
+                                fontSize: 14,
+                                color: '#24292e'
+                            },
+                            contentText: {
                                 fontSize: 14,
                                 color: '#24292e'
                             },
@@ -142,7 +152,7 @@ class CurrView extends Component {
                         }}
                         returnFormat = {'YYYY-MM-DD'}
                         outFormat = {'YYYY-MM-DD'}
-                        placeholder = { '📅 ' + this.state.start + ' 一 ' + this.state.end }
+                        placeholder = { this.state.start + ' 一 ' + this.state.end }
                         markText = {'Выберете дату'}
                         ButtonText = {'Применить'}
                         mode = {'range'}
@@ -154,7 +164,7 @@ class CurrView extends Component {
             );
         }
     }
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -165,17 +175,11 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
-        width: '100%',
+        width: screenWidth,
         height: 60,
         paddingVertical: 10,
         paddingHorizontal: 20,
-        backgroundColor: 'black',
-        borderBottomColor: 'rgb(259,54,36)',
-        borderBottomWidth: 1,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.5,
-        shadowRadius: 3
+        backgroundColor: '#2196F3'
     },
     menuButton: {
         width: 40,
@@ -205,6 +209,10 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
     },
+    card: {
+        padding: 10,
+        marginBottom: 15
+    },
     title: {
         fontSize: 20,
         fontWeight: '900',
@@ -222,7 +230,7 @@ const styles = StyleSheet.create({
     },
     picker: {
         height: 40,
-        borderColor: '#2f3f4e',
+        borderColor: '#1E88E5',
         borderRadius: 5
     }
 });

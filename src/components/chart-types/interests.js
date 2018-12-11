@@ -49,8 +49,8 @@ export default class InterestsChartView extends Component {
         }
 
         return (
-            <View style={styles.chartArea} elevation={5}>
-                <BarChart style={styles.chart} data={data} width={screenWidth - 10} height={250} chartConfig={chartConfig} />
+            <View style={styles.chartArea}>
+                <BarChart style={styles.chart} data={data} width={screenWidth - 30} height={250} chartConfig={chartConfig} />
 
                 <View style={styles.title}>
                     <Text style={[styles.titleText, {fontWeight: '800'}]}>{this.props.chartInfo.name + (calc ? ": " : "")}</Text>
@@ -63,26 +63,18 @@ export default class InterestsChartView extends Component {
 
 const styles = StyleSheet.create({
     chartArea: {
-        marginBottom: 20,
         height: 290,
         overflow: 'hidden'
     },
     chart: {
         height: 240,
         marginLeft: -30,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.7,
-        shadowRadius: 5
     },
     title: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingBottom: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#2f3f4e'
+        alignItems: 'center'
     },
     titleText: {
         fontSize: 15,

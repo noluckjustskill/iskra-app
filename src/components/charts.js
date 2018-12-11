@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, ScrollView, ActivityIndicator} from 'react-native';
 
+import CardView from 'react-native-cardview';
 import BarChartView from './chart-types/bar';
 import LineChartView from './chart-types/line';
 import PieChartView from './chart-types/pie';
@@ -47,15 +48,31 @@ export default class Charts extends Component {
             return new Promise(resolve => {
                 this.fetchData(chart.item, this.props.from, this.props.to, chart.mode).then(data => {
                     if(chart.type === 'line'){
-                        resolve(<LineChartView key={i} style={styles.chart} chartData={data} chartInfo={chart.info} />);
+                        resolve(
+                            <CardView key={i} cardElevation={5} cardMaxElevation={5} cornerRadius={3} style={styles.chart}>
+                                <LineChartView chartData={data} chartInfo={chart.info} />
+                            </CardView>
+                        );
                     }else if(chart.type === 'pie'){
-                        resolve(<PieChartView key={i} style={styles.chart} chartData={data} chartInfo={chart.info} />);
+                        resolve(
+                            <CardView key={i} cardElevation={5} cardMaxElevation={5} cornerRadius={3} style={styles.chart}>
+                                <PieChartView chartData={data} chartInfo={chart.info} />
+                            </CardView>    
+                        );
                     }else if(chart.type === 'columns'){
-                        resolve(<BarChartView key={i} style={styles.chart} chartData={data} chartInfo={chart.info} />);
+                        resolve(
+                            <CardView key={i} cardElevation={5} cardMaxElevation={5} cornerRadius={3} style={styles.chart}>
+                                <BarChartView chartData={data} chartInfo={chart.info} />
+                            </CardView>
+                        );
                     }else if(chart.type === 'interests'){
                         resolve([
-                            <InterestsChartView key={Math.random()} style={styles.chart} chartData={Object.values(data)[0]} chartInfo={chart.info.catalog} />,
-                            <InterestsChartView key={Math.random()} style={styles.chart} chartData={Object.values(data)[1]} chartInfo={chart.info.cost} />
+                            <CardView key={Math.random()} cardElevation={5} cardMaxElevation={5} cornerRadius={3} style={styles.chart}>
+                                <InterestsChartView chartData={Object.values(data)[0]} chartInfo={chart.info.catalog} />
+                            </CardView>,
+                            <CardView key={Math.random()} cardElevation={5} cardMaxElevation={5} cornerRadius={3} style={styles.chart}>
+                                <InterestsChartView chartData={Object.values(data)[1]} chartInfo={chart.info.cost} />
+                            </CardView>
                         ]);
                     }
                 });
@@ -101,4 +118,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         marginTop: 20
     },
+    chart: {
+        marginBottom: 20,
+        padding: 10
+    }
 });
