@@ -1,23 +1,27 @@
 {
   "name": "IskraApp",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "private": true,
+  "author": "Artemiy Eskov",
+  "license": "UNLICENSED",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "build": "",
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
     "firebase": "^5.0.3",
+    "moment": "^2.22.1",
+    "moment-range": "^2.2.0",
     "npm": "^6.4.1",
+    "paths-js": "^0.4.7",
+    "prop-types": "^15.6.2",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-calendars": "^1.21.0",
     "react-native-cardview": "^2.0.2",
-    "react-native-chart-kit": "^1.2.0",
-    "react-native-date-ranges": "^2.3.0",
     "react-native-extended-stylesheet": "^0.10.0",
-    "react-native-highcharts": "^1.0.2",
     "react-native-shadow": "^1.2.2",
     "react-native-side-menu": "^1.1.3",
     "react-native-svg": "^8.0.8",

@@ -3,8 +3,8 @@ import {Dimensions, StyleSheet, Text, View, ScrollView, TouchableOpacity, Image}
 
 import SideMenu from 'react-native-side-menu';
 import CardView from 'react-native-cardview';
-import DatePicker from 'react-native-date-ranges';
 
+import DatePicker from '../libs/react-native-date-ranges';
 import Menu from './menu';
 import Charts from './charts';
 
@@ -125,6 +125,12 @@ class CurrView extends Component {
                         <View style={styles.line}>
                             <Text style={{ fontWeight: '600' }}>{"URL сайта: "}</Text><Text>{data.url}</Text>
                         </View>
+                    </CardView>
+
+                    
+                    <CardView cardElevation={3} cardMaxElevation={3} cornerRadius={3} style={styles.card}>
+                        <Text style={styles.title}>{"Информация об оплате"}</Text>
+
                     </CardView>
                 </View>
             );
